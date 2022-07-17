@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c8bebfce86bec84b96bf1333e94873a, type: 3}
+  m_Name: Chest Drop Table
+  m_EditorClassIdentifier: 
+  Items:
+  - {fileID: 275238818904895870, guid: 9f2af86a83f436d4ebae4fdf635f47c7, type: 3}
+  - {fileID: 8064875480035997517, guid: 2ed8320207452ce41ae1a2ecadba12e6, type: 3}
+  - {fileID: 3319258200168576822, guid: 7ee19fca136580644a53566d78d5f8e1, type: 3}
+  - {fileID: 2297511895173234444, guid: 7a3f238f53da46046b2dd71e0db876a5, type: 3}
+  - {fileID: 7371523017429539507, guid: 8d44f06122194f647a1847fb77b83752, type: 3}

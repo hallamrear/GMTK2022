@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bc4a2ac4a61496d49b885b2e54087d56
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - mCharacterTile: {fileID: 11400000, guid: e343bf0ad84a7ce46ba8fb5b5b9d4d78, type: 2}
+  - WorldTilemap: {instanceID: 0}
+  - CharacterMap: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
