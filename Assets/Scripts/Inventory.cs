@@ -126,27 +126,27 @@ public class Inventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Y))
-        //    AddItem(mItemPrefabs[0]);
-        //if (Input.GetKeyDown(KeyCode.U))
-        //    AddItem(mItemPrefabs[1]);
-        //if (Input.GetKeyDown(KeyCode.I))
-        //    AddItem(mItemPrefabs[2]);
-        //if (Input.GetKeyDown(KeyCode.O))
-        //    AddItem(mItemPrefabs[3]);
-        //if (Input.GetKeyDown(KeyCode.P))
-        //    AddItem(mItemPrefabs[4]);
-        //
-        //if (Input.GetKeyDown(KeyCode.G))
-        //    RemoveItem(mItemPrefabs[0]);
-        //if (Input.GetKeyDown(KeyCode.H))
-        //    RemoveItem(mItemPrefabs[1]);
-        //if (Input.GetKeyDown(KeyCode.J))
-        //    RemoveItem(mItemPrefabs[2]);
-        //if (Input.GetKeyDown(KeyCode.K))
-        //    RemoveItem(mItemPrefabs[3]);
-        //if (Input.GetKeyDown(KeyCode.L))
-        //    RemoveItem(mItemPrefabs[4]);
+        if (Input.GetKeyDown(KeyCode.Y))
+            AddItem(mItemPrefabs[0]);
+        if (Input.GetKeyDown(KeyCode.U))
+            AddItem(mItemPrefabs[1]);
+        if (Input.GetKeyDown(KeyCode.I))
+            AddItem(mItemPrefabs[2]);
+        if (Input.GetKeyDown(KeyCode.O))
+            AddItem(mItemPrefabs[3]);
+        if (Input.GetKeyDown(KeyCode.P))
+            AddItem(mItemPrefabs[4]);
+        
+        if (Input.GetKeyDown(KeyCode.G))
+            RemoveItem(mItemPrefabs[0]);
+        if (Input.GetKeyDown(KeyCode.H))
+            RemoveItem(mItemPrefabs[1]);
+        if (Input.GetKeyDown(KeyCode.J))
+            RemoveItem(mItemPrefabs[2]);
+        if (Input.GetKeyDown(KeyCode.K))
+            RemoveItem(mItemPrefabs[3]);
+        if (Input.GetKeyDown(KeyCode.L))
+            RemoveItem(mItemPrefabs[4]);
 
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -177,6 +177,7 @@ public class Inventory : MonoBehaviour
                 GameObject obj = Instantiate(mItemPrefabs[mCurrentItem]);
                 obj.transform.position = mMovement.WorldTilemap.WorldToCell(mMovement.GetTilePosition());
                 obj.GetComponent<Item>().Use(this.gameObject, mMovement.GetTilePosition());
+                RemoveItem(obj);
             }
             else
             {
@@ -184,7 +185,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        if(Input.GetKey(KeyCode.I))
+        if(Input.GetKey(KeyCode.Tab))
         {
             mInventoryUI.SetActive(true);
         }

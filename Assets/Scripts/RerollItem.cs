@@ -20,6 +20,13 @@ public class RerollItem : MonoBehaviour, Item
 
     public void Use(GameObject player, Vector3Int TileUsedOn)
     {
-
+        GridMovement movement = player.GetComponent<GridMovement>();
+        movement.mDamageRollList.Clear();
+        movement.mDamageRollList.Add(Random.Range(1, 6));
+        movement.mDamageRollList.Add(Random.Range(1, 6));
+        movement.mDamageRollList.Add(Random.Range(1, 6));
+        movement.mDamageRollList.Add(Random.Range(1, 6));
+        movement.mDamageRollList.Add(Random.Range(1, 6));
+        Destroy(this.gameObject);
     }
 }

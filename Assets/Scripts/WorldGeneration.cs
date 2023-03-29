@@ -145,17 +145,19 @@ public class WorldGeneration : MonoBehaviour
     public int MinRoomCount;
     private int mRoomCount;
 
+    public GameObject enemyPrefab;
     private Room startRoom;
     private Room endRoom;
     public List<Room> Rooms = new List<Room>();
     public List<Chest> Chests = new List<Chest>();
     public List<Tunnel> Tunnels = new List<Tunnel>();
     public List<Vector3Int> Doors = new List<Vector3Int>();
+    public List<EnemyAI> Enemies = new List<EnemyAI>();
 
     [SerializeField] ChestDropTable_SO mChestDropTable;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         GenerateMap();
     }
@@ -163,17 +165,39 @@ public class WorldGeneration : MonoBehaviour
     {
         foreach (Room room in Rooms)
         {
-            int chestX = 0, chestY = 0;
+            int posX = 0, posY = 0;
 
             int chestCount = RNGCore.RandomRoll(0, 3);
 
             for (int i = 0; i < chestCount; i++)
             {
-                chestX = RNGCore.RandomRoll(room.InnerTL.x + 1, room.InnerBR.x - 1);
-                chestY = RNGCore.RandomRoll(room.InnerBR.y + 1, room.InnerTL.y - 1);
+                posX = UnityEngine.Random.Range(room.InnerTL.x + 1, room.InnerBR.x - 1);
+                posY = UnityEngine.Random.Range(room.InnerBR.y + 1, room.InnerTL.y - 1);
 
-                Chests.Add(new Chest(room, new Vector3Int(chestX, chestY, 0), mChestDropTable));
-                WorldTilemap.SetTile(new Vector3Int(chestX, chestY, 0), mClosedChestTile);
+                Chests.Add(new Chest(room, new Vector3Int(posX, posY, 0), mChestDropTable));
+                WorldTilemap.SetTile(new Vector3Int(posX, posY, 0), mClosedChestTile);
+            }
+
+            if (room.Center != startRoom.Center)
+            {
+                int enemyCount = UnityEngine.Random.Range(1, 4);
+
+                if (enemyCount != 0)
+                {
+                    for (int i = 0; i < enemyCount; i++)
+                    {
+                        posX = UnityEngine.Random.Range(room.InnerTL.x + 1, room.InnerBR.x - 1);
+                        posY = UnityEngine.Random.Range(room.InnerBR.y + 1, room.InnerTL.y - 1);
+
+                        GameObject obj = Instantiate(enemyPrefab);
+                        obj.GetComponent<EnemyAI>().SetTilePosition(new Vector3Int(posX, posY, 0));
+                        Enemies.Add(obj.GetComponent<EnemyAI>());
+                    }
+                }
+                else
+                {
+                    Debug.LogError("somehow not 0");
+                }
             }
         }
     }
@@ -186,6 +210,15 @@ public class WorldGeneration : MonoBehaviour
     [ContextMenu("gen")]
     public void GenerateMap()
     {
+        for (int i = 0; i < Enemies.Count; i++)
+        {
+            if (Enemies[i])
+            {
+                Destroy(Enemies[i].gameObject);
+                Enemies[i] = null;
+            }
+        }
+        Enemies.Clear();
         Doors.Clear();
         Tunnels.Clear();
         Rooms.Clear();
@@ -216,8 +249,6 @@ public class WorldGeneration : MonoBehaviour
         GenerateRoomObjects();
 
         CleanupBadGeneration();
-
-        FindObjectOfType<GridMovement>().SetTilePosition(GetStartRoomPosition());
     }
 
     void CleanupBadGeneration()

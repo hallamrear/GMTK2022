@@ -36,9 +36,9 @@ public class BombItem : MonoBehaviour, Item
             // enemies within 1m of the player
             foreach (var col in colliders)
             {
-                if (col.GetComponent<Enemy>() != null)
+                if (col.GetComponent<EnemyAI>() != null)
                 {
-                    col.gameObject.GetComponent<Enemy>().Kill();
+                    col.gameObject.GetComponent<EnemyAI>().Kill();
                 }
             }
         }
